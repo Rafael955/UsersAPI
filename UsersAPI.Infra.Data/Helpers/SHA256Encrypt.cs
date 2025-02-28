@@ -7,7 +7,7 @@ namespace UsersAPI.Infra.Data.Helpers
     /// <summary>
     /// Classe para criptografia de dados no padrão SHA256
     /// </summary>
-    public class SHA256Encrypt
+    public abstract class SHA256Encrypt
     {
         //Método estático para realizar a criptografia
         public static string Create(string value)

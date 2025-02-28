@@ -7,7 +7,7 @@
 
         #region Navegabilidades
         
-        public List<User> Users { get; set; }
+        public virtual List<User> Users { get; set; }
 
         #endregion
     }

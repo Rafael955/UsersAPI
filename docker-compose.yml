@@ -1,4 +1,5 @@
 services:
+
   sqlserver:
     image: mcr.microsoft.com/mssql/server:latest
     container_name: sqlserver_usersapi
@@ -11,6 +12,27 @@ services:
       - sqlserver_data:/var/opt/mssql
     restart: always
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq_usersapi
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    restart: always
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog_usersapi
+    ports:
+      - "1025:1025"  # Porta para SMTP
+      - "8025:8025"  # Porta para a interface web
+    restart: always
+
 volumes:
   sqlserver_data:
+
+
 

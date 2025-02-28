@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,16 +44,19 @@ namespace UsersAPI.Infra.Data.Repositories
             using (var dataContext = new DataContext())
             {
                 //LAMBDA
-                //return dataContext.Set<User>()
-                //    .Where(u => u.Email.Equals(email) && u.Password.Equals(password))
-                //    .FirstOrDefault();
+                return dataContext.Set<User>()
+                    .Include(x => x.Role)
+                    .Where(u => u.Email.Equals(email) && u.Password.Equals(password))
+                    .FirstOrDefault();
 
                 //LINQ
-                var query = from u in dataContext.Set<User>()
-                            where u.Email.Equals(email) && u.Password.Equals(password)
-                            select u; 
-                
-                return query.FirstOrDefault();
+                //var query = from u in dataContext.Set<User>()
+                //            join r in dataContext.Set<Role>()
+                //            on u.RoleId equals r.Id
+                //            where u.Email.Equals(email) && u.Password.Equals(password)
+                //            select u;
+
+                //return query.FirstOrDefault();
             }
         }
 
